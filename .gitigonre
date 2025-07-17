@@ -38,3 +38,12 @@ dist/
 build/
 *.min.js
 *.min.css
+
+
+conf/__pycache__/
+myenv/
+cooking/__pycache__
+cooking/migrations/
+.env
+conf/__init__.py
+db.sqlite3
