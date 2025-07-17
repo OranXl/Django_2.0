@@ -1,31 +1,40 @@
-# Файлы окружения
-.myenv
-.myenv.local
+# Игнорировать файлы/папки с именем myenv
+myenv/
+*.myenv
 
-# Базы данных
-*.sqlite3
-*.db
-
-# Питоновские кэш-файлы
-__pycache__/
-*.py[cod]
-
-# Логи и временные файлы
-*.log
+# Временные и системные файлы
 *.tmp
+*.log
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
 
-# IDE
+# Файлы IDE и редакторов
 .idea/
 .vscode/
+*.suo
+*.user
+*.code-workspace
 
-# Виртуальное окружение
-myenv/
+# Файлы зависимостей (Python, Node.js и др.)
+__pycache__/
+*.py[cod]
+node_modules/
+.env
 venv/
+*.egg-info/
 
-# Миграции 
-*/migrations/*
-!*/migrations/__init__.py
+# Бинарные и скомпилированные файлы
+*.exe
+*.dll
+*.so
+*.class
+*.out
 
-# Статические файлы 
-staticfiles/
-media/
+# Автогенерируемые файлы
+dist/
+build/
+*.min.js
+*.min.css
