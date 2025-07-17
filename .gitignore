@@ -43,7 +43,7 @@ build/
 conf/__pycache__/
 myenv/
 cooking/__pycache__
-cooking/migrations/
 .env
 conf/__init__.py
 db.sqlite3
+cooking/__init__.py
