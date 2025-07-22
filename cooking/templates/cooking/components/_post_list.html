@@ -1,0 +1,13 @@
+<div class="card text-center mb-4">
+    <div class="card-header">
+        {{ post.category }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content | truncatewords:20}}</p>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать</a>
+    </div>
+    <div class="card-footer text-muted">
+        {{ post.craete_at}}
+    </div>
+</div>
