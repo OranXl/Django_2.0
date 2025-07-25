@@ -10,7 +10,9 @@
                         <a href="#!" class="btn btn-dark">Назад</a>
                     </div>
                 </div>
-                    <img src="" class="card-img-top" alt=""><div class="card-body">
+                    <img src="" class="card-img-top" alt="">
+
+                    <div class="card-body">
                     {% if post.photo %}
                     <img src="{{ post.photo.url }}" width="300" alt="">
                     {% else %}
@@ -21,7 +23,7 @@
                         {{ post.content | linebreaks }}
                     </p>
                 </div>
-                    <div class="card-footer d-flex justify-content-between"><p class="card-text">4 января 2023 г. 15:47</p>
+                    <div class="card-footer d-flex justify-content-between"><p class="card-text">{{ post.craete_at }}</p>
                         <a href="/profile/1">Автор статьи: Какой то человек</a>
                         <p class="card-text">{{ post.wathed }}</p>
                     </div>
@@ -44,26 +46,18 @@
             <!--  Recommendation-->
             <div class="col-1"></div>
             <div class="col-4">
+                {% for ext in ext_post %}
                 <div class="card" style="width: 18rem;">
+
+                    {% if ext.photo %}
+                    <img src="{{ ext.photo.url }}" width="300" alt="">
+                    {% else %}
+
                     <img class="card-img-top" src="https://www.raumplus.ru/upload/iblock/99e/Skoro-zdes-budet-foto.jpg" width="200" alt="">
-                    <div class="card-body"><h5 class="card-title">Блюдо</h5><a href="#!" class="btn btn-primary">Подробнее</a></div>
+                    {% endif %}
+                    <div class="card-body"><h5 class="card-title">{{ ext.title }}</h5><a href="{{ ext.get_absolute_url }}" class="btn btn-primary">Подробнее</a></div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.raumplus.ru/upload/iblock/99e/Skoro-zdes-budet-foto.jpg" width="200" alt="">
-                    <div class="card-body"><h5 class="card-title">Блюдо</h5><a href="#!" class="btn btn-primary">Подробнее</a></div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.raumplus.ru/upload/iblock/99e/Skoro-zdes-budet-foto.jpg" width="200" alt="">
-                    <div class="card-body"><h5 class="card-title">Блюдо</h5><a href="#!" class="btn btn-primary">Подробнее</a></div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.raumplus.ru/upload/iblock/99e/Skoro-zdes-budet-foto.jpg" width="200" alt="">
-                    <div class="card-body"><h5 class="card-title">Блюдо</h5><a href="#!" class="btn btn-primary">Подробнее</a></div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.raumplus.ru/upload/iblock/99e/Skoro-zdes-budet-foto.jpg" width="200" alt="">
-                    <div class="card-body"><h5 class="card-title">Блюдо</h5><a href="#!" class="btn btn-primary">Подробнее</a></div>
-                </div>
+                {% endfor%}
             </div>
             </div>
 {% endblock main %}
