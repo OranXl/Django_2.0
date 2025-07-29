@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Category, Post
 from django.db.models import F
-from .forms import PostAddForms, LoginForm
+from .forms import PostAddForms, LoginForm, RegistrationFomr
 from django.contrib.auth import login, logout
 
 
@@ -76,7 +76,7 @@ def user_login(request):
 
     context = {
         'title': "Авторизация пользователя",
-        'from': form
+        'form': form
     }
     return render(request, template_name='cooking/login_form.html', context=context)
 
@@ -84,3 +84,16 @@ def user_logout(request):
     """Выход пользователя"""
     logout(request)
     return redirect('index')
+
+def register(request):
+    """Регистрация"""
+    if request.method == 'POST':
+        pass
+    else:
+        form = RegistrationFomr()
+
+    context = {
+        'title': 'Регистрация пользователя',
+        'form': form
+    }
+    return render(request, template_name='cooking/register.html', context=context)
