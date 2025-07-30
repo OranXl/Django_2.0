@@ -88,7 +88,10 @@ def user_logout(request):
 def register(request):
     """Регистрация"""
     if request.method == 'POST':
-        pass
+        form = RegistrationFomr(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
     else:
         form = RegistrationFomr()
 
