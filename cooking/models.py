@@ -25,7 +25,7 @@ class Post(models.Model):
     photo = models.ImageField(upload_to='photos/', blank=True, null=True, verbose_name='Изображения')
     wathed = models.IntegerField(default=0, verbose_name='Просмотры')
     is_publeshed = models.BooleanField(default=True, verbose_name='Публикация')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='posts', verbose_name='Категория')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts', verbose_name='Категория')
 
     def __str__(self):
         return self.title
