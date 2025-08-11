@@ -15,7 +15,7 @@
                             </li>
                         </ul>
                         <div class="d-flex">
-                            <form class="d-flex me-3" role="search" method="get" action="#!">
+                            <form class="d-flex me-3" role="search" method="get" action="{% url 'search' %}">
                                 <input name="q" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                                 <button class="btn btn-outline-success" type="submit">Поиск</button>
                             </form>
@@ -38,7 +38,7 @@
                                         Здравствуйте {{ request.user.username }}
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#!">Моя страница</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'profile' request.user.pk %}">Моя страница</a></li>
                                         <li><a class="dropdown-item" href="{% url 'add' %}">Добавить статью</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="{% url 'logout' %}">Выход</a></li>

@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+
+
 
 class Category(models.Model):
     """Категория новостей"""
@@ -26,6 +29,7 @@ class Post(models.Model):
     wathed = models.IntegerField(default=0, verbose_name='Просмотры')
     is_publeshed = models.BooleanField(default=True, verbose_name='Публикация')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts', verbose_name='Категория')
+    author = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -38,3 +42,16 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
 
+class Comment(models.Model):
+    """Коментарии к постам"""
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Пост')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    text = models.TextField(verbose_name='Ваш комментарий')
+    craete_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return self.text
+    
+    class Meta:
+        verbose_name = 'Коментарий'
+        verbose_name_plural = 'Клментарии'

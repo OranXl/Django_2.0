@@ -13,9 +13,12 @@ urlpatterns = (
     path('add_article/', AddPost.as_view(), name='add'),
     path('post/<int:pk>/update', PostUpdate.as_view(), name='post_update'),
     path('post/<int:pk>/delete', Postdelet.as_view(), name='delete_post'),
+    path('search/', SearchResult.as_view(), name='search'),
 
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
-    path('register/', register, name='register')
+    path('register/', register, name='register'),
+    path('add_comment/<int:post_id>', add_comment, name='add_comment'),
+    path('profile/<int:user_id>', profile, name='profile'),
 )
 

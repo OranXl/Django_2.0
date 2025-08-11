@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
-from .models import Category, Post
-from django.db.models import F
-from .forms import PostAddForms, LoginForm, RegistrationFomr
+from .models import Category, Post, Comment
+from django.db.models import F, Q
+from .forms import PostAddForms, LoginForm, RegistrationFomr, CommentForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+
+
 
 # def index(request):
 #     '''Для главной страницы'''
@@ -91,6 +94,9 @@ class PostDetail(DeleteView):
         ext_post = Post.objects.all().exclude(pk=self.kwargs['pk']).order_by('-wathed')[:5]
         context['title'] = post.title
         context['ext_post'] = ext_post
+        context['comments'] = Comment.objects.filter(post=post)
+        if self.request.user.is_authenticated:
+            context['comment_form'] = CommentForm
         return context
 
 
@@ -119,6 +125,10 @@ class AddPost(CreateView):
     form_class = PostAddForms
     template_name = 'cooking/article_add_form.html'
     extra_context = {'title': 'Добавить статью'}
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class PostUpdate(UpdateView):
     """Изменение статьи"""
@@ -179,3 +189,39 @@ def register(request):
         'form': form
     }
     return render(request, template_name='cooking/register.html', context=context)
+
+
+class SearchResult(Index):
+    """Поиск слов в загоровках и содержании статей"""
+
+
+    def get_queryset(self):
+        """Функция для фильтрации выборки db"""
+        word = self.request.GET.get('q')
+        posts = Post.objects.filter(
+            Q(title__icontains=word) | Q(content__icontains=word)
+        )
+        return posts
+    
+def add_comment(request, post_id):
+    """Добавления комментария к статьям"""
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = request.user
+        comment.post = Post.objects.get(pk=post_id)
+        comment.save()
+        messages.success(request, message='Ваш комментарий успешно добавлен')
+
+    return redirect('post_detail', post_id)
+
+
+def profile(reqest, user_id):
+    """Страница пользователя"""
+    user = User.objects.get(pk=user_id)
+    posts = Post.objects.filter(author=user)
+    context = {
+        'user': user,
+        'posts': posts
+    }
+    return render(reqest, template_name='cooking/profile.html', context=context)
