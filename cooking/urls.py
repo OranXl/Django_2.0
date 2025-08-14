@@ -14,6 +14,7 @@ urlpatterns = (
     path('post/<int:pk>/update', PostUpdate.as_view(), name='post_update'),
     path('post/<int:pk>/delete', Postdelet.as_view(), name='delete_post'),
     path('search/', SearchResult.as_view(), name='search'),
+    path('password', UserChangePassword.as_view(), name='change_password'),
 
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
