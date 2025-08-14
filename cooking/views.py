@@ -8,6 +8,8 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
+from .serializers import PostSerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 
 
@@ -233,3 +235,14 @@ class UserChangePassword(PasswordChangeView):
     """Для смены пароля"""
     template_name = 'cooking/password_change_form.html  '
     success_url = reverse_lazy('index')
+
+
+class CookingAPI(ListAPIView):
+    """Выдача всех статей по API"""
+    queryset = Post.objects.filter(is_publeshed=True)
+    serializer_class = PostSerializer
+
+class CookingAPIDetail(RetrieveAPIView):
+    """Выдача статьи по API"""
+    queryset = Post.objects.filter(is_publeshed=True)
+    serializer_class = PostSerializer

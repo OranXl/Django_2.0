@@ -15,6 +15,8 @@ urlpatterns = (
     path('post/<int:pk>/delete', Postdelet.as_view(), name='delete_post'),
     path('search/', SearchResult.as_view(), name='search'),
     path('password', UserChangePassword.as_view(), name='change_password'),
+    path('post/api', CookingAPI.as_view(), name='CookingAPI'),
+    path('post/api/<int:pk>', CookingAPIDetail.as_view(), name='CookingAPIDetail'),
 
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
