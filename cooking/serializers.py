@@ -1,4 +1,4 @@
-from .models import Post
+from .models import Post, Category
 from rest_framework import serializers
 
 
@@ -8,3 +8,10 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model=Post
         fields = ('title', 'category', 'craete_at', 'content', 'author')
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """Поля которые будут отображаться в API"""
+    class Meta:
+        model= Category
+        fields = ('title', 'id')
