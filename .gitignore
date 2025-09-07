@@ -48,4 +48,4 @@ conf/__init__.py
 db.sqlite3
 cooking/__init__.py
 /wHTML
-web_site_cache
+/web_site_cache

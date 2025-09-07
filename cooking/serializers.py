@@ -6,12 +6,13 @@ class PostSerializer(serializers.ModelSerializer):
     """Поля которые будут отображаться в API"""
 
     class Meta:
-        model=Post
-        fields = ('title', 'category', 'craete_at', 'content', 'author')
+        model = Post
+        fields = ("title", "category", "craete_at", "content", "author")
 
 
 class CategorySerializer(serializers.ModelSerializer):
     """Поля которые будут отображаться в API"""
+
     class Meta:
-        model= Category
-        fields = ('title', 'id')
+        model = Category
+        fields = ("title", "id")
